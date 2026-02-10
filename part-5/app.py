@@ -18,15 +18,14 @@ app = Flask(__name__)
 # =============================================================================
 
 PERSONAL_INFO = {
-    'name': 'Your Name',
+    'name': 'sagar',
     'title': 'Web Developer',
     'bio': 'A passionate developer learning Flask and web development.',
-    'email': 'your.email@example.com',
-    'github': 'https://github.com/yourusername',
-    'linkedin': 'https://linkedin.com/in/yourusername',
+    'email': 'lokhandesagar009@gmail.com',
+    'github': 'https://github.com/sagarlokhande2005',
 }
 
-SKILLS = [
+skills = [
     {'name': 'Python', 'level': 80},
     {'name': 'HTML/CSS', 'level': 75},
     {'name': 'Flask', 'level': 60},
@@ -50,9 +49,48 @@ def home():
     return render_template('index.html', info=PERSONAL_INFO)
 
 
-@app.route('/about')
+@app.route("/about")
+@app.route("/about/")
 def about():
-    return render_template('about.html', info=PERSONAL_INFO, skills=SKILLS)
+    return render_template(
+        "about.html",
+        info=PERSONAL_INFO,
+        skills=skills
+    )
+
+
+BLOGS = [
+    {
+        "id": 1,
+        "title": "Basics of Flask & HTML",
+        "category": "Flask",
+        "author": "sagar",
+        "date": "10 Jan 2026",
+        "summary": "Introduction to Flask with HTML templates"
+    },
+    {
+        "id": 2,
+        "title": "Flask with Python Routing",
+        "category": "Python",
+        "author": "sagar",
+        "date": "12 Jan 2026",
+        "summary": "Understanding dynamic routes in Flask"
+    },
+    {
+        "id": 3,
+        "title": "Jinja2 Templates Explained",
+        "category": "Flask",
+        "author": "sagar",
+        "date": "15 Jan 2026",
+        "summary": "Using loops, conditions and inheritance in Jinja2"
+    }
+]
+
+
+@app.route('/blog')
+def blogs():
+    return render_template('blog.html', info=PERSONAL_INFO, blogs=BLOGS)
+
 
 
 @app.route('/projects')
@@ -77,6 +115,7 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 # =============================================================================

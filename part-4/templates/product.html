@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Routes - Flask</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2d3748; }
+        nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 5px;
+        }
+        nav a {
+            margin-right: 15px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover { color: #2b6cb0; }
+        .route-demo {
+            background: #ebf8ff;
+            border: 2px solid #90cdf4;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .route-demo h3 {
+            margin-top: 0;
+            color: #2b6cb0;
+        }
+        .route-demo a {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            padding: 8px 16px;
+            background: #4299e1;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .route-demo a:hover {
+            background: #3182ce;
+        }
+        code {
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .try-it {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about/">About</a>
+            <a href="/links">URL Builder</a>
+            <a href="/category/">Category</a>
+        </nav>
+
+
+
+        <span class="product-id">Product ID: {{ product_id }}</span>
+
+        {% if product %}
+            <!-- Post found - display it -->
+            <div class="product-card">
+                <h2>{{ product.id }}</h2>
+                <h2>{{ product.name }}</h2>
+            </div>
+
+            
+        {% else %}
+            <!-- Product not found -->
+            <div class="not-found">
+                <h2>Product Not Found</h2>
+                <p>Sorry, product #{{ product_id }} doesn't exist.</p>
+                <p>We only have posts 1, and 2 in our demo database.</p>
+            </div>
+        {% endif %}
+
+        <div class="nav-posts">
+            {% if product_id > 1 %}
+                <a href="/product/{{ product_id - 1 }}">Previous Product</a>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            <a href="/product/{{ product_id + 1 }}">Next P</a>
+        </div>
+
+        <h3>Available product</h3>
+        <ul>
+            <li><a href="/product/1">Product 1: Laptop</a></li>
+            <li><a href="/product/2">Product 2: Mobile</a></li>
+        </ul>
+    </div>
+</body>
+</html>

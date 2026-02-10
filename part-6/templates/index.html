@@ -1,0 +1,52 @@
+ 
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2 style="margin-bottom: 25px;">📋 All Tasks 📌✅</h2>
+
+<div class="task-list">
+
+    {% for task in tasks %}
+    <div class="task-card">
+
+        <div class="task-header">
+            <h3>{{ task.title | upper }}</h3>
+            <span class="task-id">#{{ task.id }}</span>
+        </div>
+
+        <div class="task-body">
+            <p>
+                <strong>Status:</strong>
+                {% if task.status == 'Completed' %}
+                    <span class="status completed">Completed</span>
+                {% elif task.status == 'In Progress' %}
+                    <span class="status progress">In Progress</span>
+                {% else %}
+                    <span class="status pending">Pending</span>
+                {% endif %}
+            </p>
+
+            <p>
+                <strong>Priority:</strong>
+                <span class="priority {{ task.priority | lower }}">
+                    {{ task.priority }}
+                </span>
+            </p>
+        </div>
+
+        <div class="task-footer">
+            <a href="{{ url_for('task', id=task.id) }}" class="view-btn">
+                Check it →
+            </a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+

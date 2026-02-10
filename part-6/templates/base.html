@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<head>
+    <title>{% block title %}To-Do App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+</head>
+<body>
+
+<h1>📝 Personal To-Do App✅</h1>
+
+<nav>
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('add') }}">Add Task</a> |
+    <a href="{{ url_for('about') }}">About</a>
+</nav>
+
+<hr>
+
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

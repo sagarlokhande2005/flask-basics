@@ -18,7 +18,7 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)  # debug=True enables auto-reload and detailed error messages
+     app.run(debug=True) # debug=True enables auto-reload and detailed error messages
 
 
 # =============================================================================

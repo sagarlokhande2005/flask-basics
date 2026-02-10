@@ -81,9 +81,11 @@
             <a href="/profile">Profile</a>
             <a href="/skills">Skills</a>
             <a href="/projects">Projects</a>
+            <a href="/grades">Grades</a>
+
         </nav>
 
-        <h1>User Profile</h1>
+        <h1>Daksh Profile</h1>
         <p>This page demonstrates passing multiple variables to a template.</p>
 
         <!-- Profile card using multiple variables -->
@@ -91,6 +93,12 @@
             <h2>{{ name }}</h2>
             <div class="profile-item">
                 <span>Age:</span> {{ age }} years old
+            </div>
+            <div class="profile-item">
+                <span>Email:</span> {{ email }}
+            </div>
+            <div class="profile-item">
+                <span>City:</span> {{ city }}
             </div>
             <div class="profile-item">
                 <span>Course:</span> {{ course }}
@@ -111,8 +119,10 @@
 
         <div class="code-example">
 return render_template('profile.html',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;name='Sarah',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name='sagar',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;age=22,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email='lokhandesagar009@gmail.com',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;city='chandwad',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;course='Web Development',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;is_enrolled=True)
         </div>

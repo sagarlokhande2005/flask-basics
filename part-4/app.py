@@ -38,6 +38,70 @@ def user_post(username, post_id):
     return render_template('user_post.html', username=username, post_id=post_id)
 
 
+@app.route("/search/<query>")  # Multiple dynamic segments, visit: /user/Alice/post/1
+def search(query):
+    return render_template('search.html',query=query)
+
+@app.route('/product/<int:product_id>')  
+def show_product(product_id):
+    print('hi')
+    product = {  # Simulated post data (in real apps, this comes from a database)
+        1: {'product_id': '1','name': 'Laptop', 'Price': '50000'},
+        2: {'product_id': '2','name': 'Mobile', 'Price': '25000'},
+    }
+    product = product.get(product_id) 
+    print(product) 
+    return render_template('product.html', product_id=product_id, product=product)
+
+
+@app.route('/category/<category_name>/product/<int:product_id>')
+def category_product(category_name, product_id):
+
+    cat_dict = {
+        "electronics": [
+            {
+                "product_id": 1,
+                "product_name": "LG Fridge",
+                "product_details": "Best fridge"
+            },
+            {
+                "product_id": 2,
+                "product_name": "T.V",
+                "product_details": "Best TV"
+            }
+        ],
+        "FMCG": [
+            {
+                "product_id": 1,
+                "product_name": "Parle G",
+                "product_details": "Best Biscuit"
+            },
+            {
+                "product_id": 2,
+                "product_name": "Goodday",
+                "product_details": "Have a good day"
+            }
+        ]
+    }
+
+    product = None
+    for p in cat_dict.get(category_name, []):
+        if p["product_id"] == product_id:
+            product = p
+            break
+
+    return render_template(
+        'category_product.html',
+        category=category_name,
+        product=product,
+        product_id=product_id,
+         cat_dict=cat_dict
+    )
+
+
+
+
+
 @app.route('/about/')  # Trailing slash means both /about and /about/ work
 def about():
     return render_template('about.html')

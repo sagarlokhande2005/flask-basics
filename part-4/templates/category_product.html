@@ -84,91 +84,54 @@
             <a href="/about/">About</a>
             <a href="/links">URL Builder</a>
             <a href="/search/python">Search</a>
-        
 
-            <select onchange="location = this.value;">
+             <select onchange="location = this.value;">
             <option value="">Select Category</option>
             <option value="/category/electronics/product/1">Electronics</option>
             <option value="/category/FMCG/product/1">FMCG</option>
             </select>
-
-            
         </nav>
 
-        <h1>Dynamic Routes in Flask</h1>
-        <p>Learn how to capture values from URLs using <code>&lt;variable&gt;</code> syntax!</p>
+        <span class="product-id">
+            Category: {{ category }} | Product ID: {{ product_id }}
+        </span>
 
-        <!-- User Profile Demo -->
-        <div class="route-demo">
-            <h3>1. User Profile Route</h3>
-            <p>Route: <code>/user/&lt;username&gt;</code></p>
-            <div class="code-block">
-                @app.route('/user/&lt;username&gt;')<br>
-                def user_profile(username):<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;return render_template('user.html', username=username)
+        {% if product %}
+            <!-- Product found -->
+            <div class="product-card">
+                <h2>{{ product.product_name }}</h2>
+                <p>{{ product.product_details }}</p>
             </div>
-            <p><strong>Try it:</strong></p>
-            <a href="/user/Alice">Alice</a>
-            <a href="/user/Bob">Bob</a>
-            <a href="/user/Charlie">Charlie</a>
-        </div>
-
-        <!-- Post Demo -->
-        <div class="route-demo">
-            <h3>2. Post Route (Integer Parameter)</h3>
-            <p>Route: <code>/post/&lt;int:post_id&gt;</code></p>
-            <div class="code-block">
-                @app.route('/post/&lt;int:post_id&gt;')<br>
-                def show_post(post_id):<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;return render_template('post.html', post_id=post_id)
+        {% else %}
+            <!-- Product not found -->
+            <div class="not-found">
+                <h2>Product Not Found</h2>
+                <p>Sorry, product #{{ product_id }} doesn't exist in {{ category }}</p>
             </div>
-            <p><strong>Try it:</strong></p>
-            <a href="/post/1">Post 1</a>
-            <a href="/post/2">Post 2</a>
-            <a href="/post/3">Post 3</a>
-            <a href="/post/99">Post 99 (Not Found)</a>
+        {% endif %}
+
+        <div class="nav-posts">
+            {% if product_id > 1 %}
+                <a href="/category/{{ category }}/product/{{ product_id - 1 }}">
+                    Previous Product
+                </a>
+            {% endif %}
+
+            <a href="/category/{{ category }}/product/{{ product_id + 1 }}">
+                Next Product
+            </a>
         </div>
 
-        <!-- Multiple Parameters Demo -->
-        <div class="route-demo">
-            <h3>3. Multiple Parameters</h3>
-            <p>Route: <code>/user/&lt;username&gt;/post/&lt;int:post_id&gt;</code></p>
-            <p><strong>Try it:</strong></p>
-            <a href="/user/Alice/post/1">Alice's Post 1</a>
-            <a href="/user/Bob/post/2">Bob's Post 2</a>
-        </div>
-
-
-
- <div class="route-demo">
-            <h3>3.RICH Product  </h3>
-            
-            <p><strong>Try it:</strong></p>
-            <li><a href="/product/1">Product 1</a></li>
-            <li><a href="/product/2">Product 2</a></li>
-            <li><a href="/product/99">Product 99 (Not Found)</a></li>
-        </div>
-
-
-
-
-        
-
-        
-        
-        
-        
-        
-        <div class="try-it">
-            <strong>Try Your Own!</strong>
-            <p>Type in your browser's address bar:</p>
-            <ul>
-                <li><code>localhost:5000/user/YourName</code></li>
-                <li><code>localhost:5000/post/42</code></li>
-                <li><code>localhost:5000/user/YourName/post/1</code></li>
-            </ul>
-            
-        </div>
+        <h3>Available product</h3>
+        <ul>
+            {% for item in cat_dict[category] %}
+                <li>
+                    <a href="/category/{{ category }}/product/{{ item.product_id }}">
+                        {{ item.product_name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </body>
 </html>

@@ -20,7 +20,10 @@
             <li><a href="{{ url_for('home') }}" class="{% if request.endpoint == 'home' %}active{% endif %}">Home</a></li>
             <li><a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}active{% endif %}">About</a></li>
             <li><a href="{{ url_for('projects') }}" class="{% if request.endpoint == 'projects' or request.endpoint == 'project_detail' %}active{% endif %}">Projects</a></li>
+            <li><a href="{{ url_for('blogs') }}" class="{% if request.endpoint == 'blogs' %}active{% endif %}">Blog</a></li>
+
             <li><a href="{{ url_for('contact') }}" class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact</a></li>
+
         </ul>
     </nav>
 
